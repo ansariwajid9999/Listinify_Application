@@ -10,11 +10,14 @@ public class Album {
     private String artistName;
     private List<Song> songList;
 
-    public Album(String albumName, String artistName) {
+    public Album(String albumName, String artistName)
+    {
         this.albumName = albumName;
         this.artistName = artistName;
         this.songList = new ArrayList<>();
     }
+
+
 
     public boolean findSongByTitle(String title){
 
@@ -75,6 +78,13 @@ public class Album {
 
         return "No song found with given title";
 
+    }
+
+    public String getArtistName(){
+        return this.artistName;
+    }
+    public List<Song> getSongList(){
+        return this.songList;
     }
 
 }

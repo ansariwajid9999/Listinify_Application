@@ -4,17 +4,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+    private static Album a1,a2;
+    private static ArrayList<Song> playList;
     public static void main(String[] args) {
         System.out.println("Hello world!");
 
-        Album a1 = new Album("Old Hindi Songs","Kishore Kumar");
+        a1 = new Album("Old Hindi Songs","Kishore Kumar");
 
         a1.addNewSongToAlbum("Nile Nile Ambar",6.0);
         a1.addNewSongToAlbum("Meri bheegi si",5.0);
         a1.addNewSongToAlbum("Dil Kya kare",5.5);
         a1.addNewSongToAlbum("Ek ajnabi haseena",3.5);
 
-        Album a2 = new Album("Latest Bollywood songs","Jubin Natiyal");
+        a2 = new Album("Latest Bollywood songs","Jubin Natiyal");
 
         a2.addNewSongToAlbum("itti si hassi",4.5);
         a2.addNewSongToAlbum("Tere vaaste",3.5);
@@ -23,7 +25,7 @@ public class Main {
         a2.addNewSongToAlbum("Pasoori",3.5);
 
 
-        ArrayList<Song> playList = new ArrayList<>();
+        playList = new ArrayList<>();
 
         a1.addSongToPlayList(2,playList);
         a1.addSongToPlayList(4,playList);
@@ -39,7 +41,7 @@ public class Main {
         printMenu();
 
         System.out.println("Now Playing : ");
-        System.out.println(playList.get(0).toString());
+        System.out.println(playList.get(0));
 
         Scanner sc = new Scanner(System.in);
         int choice = sc.nextInt();
@@ -56,7 +58,7 @@ public class Main {
                         System.out.println("You are at the last song");
                     }else{
                         currentIndex++;
-                        System.out.println(playList.get(currentIndex).toString());
+                        System.out.println(playList.get(currentIndex));
                     }
                     break;
                 case 2:
@@ -64,11 +66,11 @@ public class Main {
                         System.out.println("You are at the first Song");
                     else {
                         currentIndex--;
-                        System.out.println(playList.get(currentIndex).toString());
+                        System.out.println(playList.get(currentIndex));
                     }
                     break;
                 case 3:
-                    System.out.println(playList.get(currentIndex).toString());
+                    System.out.println(playList.get(currentIndex));
                     break;
                 case 4:
                     printMenu();
@@ -77,15 +79,59 @@ public class Main {
                     printAllSongs(playList);
                     break;
                 case 6:
-                        //1 line code : self completion exercie
+                {
+                    //1 line code : self completion exercie}
+                    Song song=playList.get(currentIndex);
+                    playList.remove(song);
+                    System.out.println("This Song " + song.getTitle() + " is Deleted Successfully");
                     break;
+                }
                 case 7:
                     isOver = true;
                     break;
                 case 8:
-                    //shuffle song and
+                {
+                    //shuffle the song...
+
+                    //let's just generate a random number..
+                    Double rand=Math.random()*100;
+                    int songNo=(int)(rand%playList.size());
+
+                    System.out.print(playList.get(songNo));
+                    break;
+                }
+
                 case 9:
-                    //Print song from an artist
+                {
+                    System.out.println("Enter the Artist Name");
+                    Scanner scan=new Scanner(System.in);
+                    String artist=scan.nextLine();
+
+                    if(artist.equals(a1.getArtistName()))
+                    {
+
+                        for(Song s:a1.getSongList())
+                        {
+                            //print the song..
+                            System.out.println(s.getTitle());
+                        }
+                    }
+                    else if(artist.equals(a2.getArtistName()))
+                    {
+
+                        for(Song s:a2.getSongList())
+                        {
+                            //print the song..
+                            System.out.println(s);
+                        }
+                    }
+                    else
+                    {
+                        System.out.print("Artist Not Found");
+                    }
+                    break;
+
+                }
             }
             choice = sc.nextInt();
         }
@@ -112,6 +158,7 @@ public class Main {
         System.out.println("5. Print PlayList");
         System.out.println("6. Delete the current Song");
         System.out.println("7. Close the playlist");
-
+        System.out.println("8. to Shuffle the Song");
+        System.out.println("7. Close the playlist");
     }
 }
